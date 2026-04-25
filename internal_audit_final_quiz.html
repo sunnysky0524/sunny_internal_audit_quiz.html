@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>內部稽核概論｜考前選擇＋是非題庫</title>
+<style>
+:root{--bg:#fff7fb;--card:#fff;--main:#e86aa7;--dark:#333;--muted:#777;--ok:#16a34a;--bad:#dc2626;--line:#f3c7dd;--soft:#ffe4f1;}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;background:linear-gradient(180deg,#fff7fb,#f8fbff);color:var(--dark);line-height:1.65}.wrap{max-width:980px;margin:0 auto;padding:18px 14px 80px}header{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 8px 24px rgba(232,106,167,.12);position:sticky;top:8px;z-index:5}h1{margin:0;font-size:25px;color:#c02672}.sub{color:var(--muted);font-size:14px;margin-top:4px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.tab,.btn{border:0;border-radius:999px;padding:9px 14px;background:var(--soft);color:#9d174d;font-weight:700;cursor:pointer}.tab.active,.btn.primary{background:var(--main);color:#fff}.grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.04)}h2{font-size:20px;margin:4px 0 10px;color:#be185d}h3{font-size:17px;margin:16px 0 8px;color:#9d174d}.note{background:#fff0f7;border-left:5px solid var(--main);padding:10px 12px;border-radius:12px;margin:8px 0}.pill{display:inline-block;background:#fce7f3;color:#9d174d;border-radius:999px;padding:3px 9px;margin:3px;font-size:13px;font-weight:700}.q{border-top:1px dashed #f0b9d5;padding:15px 0}.q:first-child{border-top:0}.q-title{font-weight:800;margin-bottom:8px}.choice{display:block;width:100%;text-align:left;background:#fff;border:1px solid #ead4df;border-radius:14px;padding:10px 12px;margin:8px 0;cursor:pointer;font-size:15px}.choice:hover{background:#fff7fb}.choice.selected{border-color:var(--main);background:#fce7f3}.choice.correct{border-color:var(--ok);background:#dcfce7}.choice.wrong{border-color:var(--bad);background:#fee2e2}.ans{display:none;margin-top:8px;padding:10px;border-radius:12px;background:#f8fafc;color:#334155}.ans.show{display:block}.controls{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.score{font-size:18px;font-weight:900;color:#be185d}.hidden{display:none}.small{font-size:13px;color:#777}.review-list li{margin:6px 0}.tf-row{display:flex;gap:8px}.tf-row .choice{width:auto;flex:1;text-align:center}@media (min-width:760px){.grid.two{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>內部稽核概論｜考前刷題神器</h1>
+  <div class="sub">選擇題＋是非題｜涵蓋歷屆題、課後自評量、老師畫線重點</div>
+  <div class="tabs">
+    <button class="tab active" data-view="quiz">開始刷題</button>
+    <button class="tab" data-view="mock">模擬考</button>
+    <button class="tab" data-view="notes">重點速記</button>
+    <button class="tab" data-view="wrong">錯題本</button>
+  </div>
+</header>
+
+<section id="quiz" class="panel">
+  <h2>全部題庫</h2>
+  <div class="controls">
+    <button class="btn primary" onclick="renderQuiz('all')">全部</button>
+    <button class="btn" onclick="renderQuiz('choice')">只看選擇</button>
+    <button class="btn" onclick="renderQuiz('tf')">只是非</button>
+    <button class="btn" onclick="shuffleCurrent()">隨機排序</button>
+    <button class="btn" onclick="resetAll()">重來</button>
+  </div>
+  <div id="score" class="score">尚未作答</div>
+  <div id="questions"></div>
+</section>
+
+<section id="mock" class="panel hidden">
+  <h2>20 題模擬考</h2>
+  <div class="note">按下開始後，會從全部題庫隨機抽 20 題，適合考前快速刷。</div>
+  <div class="controls"><button class="btn primary" onclick="startMock()">開始一回模擬考</button><button class="btn" onclick="resetAll()">重來</button></div>
+  <div id="mockScore" class="score">尚未開始</div>
+  <div id="mockQuestions"></div>
+</section>
+
+<section id="notes" class="panel hidden">
+  <h2>考前重點速記</h2>
+  <div class="grid two">
+    <div class="note"><b>GRC</b><br>治理 Governance＋風險 Risk＋法遵 Compliance。目的：達成目標、降低不確定性、確保合規。</div>
+    <div class="note"><b>公司治理五原則</b><br>股 → 董 → 監 → 利 → 資：保障股東權益、強化董事會、發揮監察人、尊重利害關係人、提升資訊透明度。</div>
+    <div class="note"><b>ERM 五面向</b><br>治 → 策 → 營 → 法 → 報：治理、策略、營運、法規、報告。</div>
+    <div class="note"><b>風險管理四要素</b><br>策 → 組 → 流 → 資：管理策略面、風險組織面、風險流程面、風險管理資訊面。</div>
+    <div class="note"><b>內控三目標</b><br>營 → 報 → 法：營運效率及效果、報導可靠及時透明、遵循法令規章。</div>
+    <div class="note"><b>COSO 五要素</b><br>環 → 風 → 控 → 資 → 監：控制環境、風險評估、控制作業、資訊與溝通、監督作業。</div>
+    <div class="note"><b>內控五配套</b><br>授 → 分 → 存 → 驗 → 紀：授權、職能分工、存取控制、獨立驗證、會計紀錄。</div>
+    <div class="note"><b>三道防線</b><br>做 → 管 → 查：第一線營運、第二線風控/法遵、第三線內部稽核。</div>
+    <div class="note"><b>內部稽核定義</b><br>獨立、客觀、確認與諮詢服務；增加價值、改善營運；評估風險管理、控制與治理。</div>
+    <div class="note"><b>報告關係</b><br>功能性報告 → 董事會 / 審計委員會；行政性報告 → CEO / 執行長。</div>
+    <div class="note"><b>獨立性 vs 客觀性</b><br>獨立性＝位置與報告關係，不受干涉；客觀性＝態度公正，不偏不倚。</div>
+    <div class="note"><b>專業應有注意</b><br>合理謹慎，不是保證完全無錯；考量範圍、複雜重要性、內控有效、重大錯誤舞弊、成本效益。</div>
+  </div>
+</section>
+
+<section id="wrong" class="panel hidden">
+  <h2>錯題本</h2>
+  <div class="note">答錯的題目會自動放到這裡。重新整理頁面後會清空。</div>
+  <div id="wrongBox"></div>
+</section>
+</div>
+<script>
+const bank = [
+{type:'choice',topic:'公司治理',q:'下列哪一項敘述不正確？',opts:['公司應該建立良善的公司治理制度','公司應確保股東對公司重大事項能夠充分知悉','公司不需具有與股東互動機制','公司應能保障股東權益，並公平對待所有股東'],ans:2,exp:'公司應該有與股東互動機制，所以「不需具有」是錯的。'},
+{type:'choice',topic:'公司治理',q:'上市上櫃公司依規定設置之獨立董事，至少有幾名？',opts:['二人以上','三人以上','四人以上','五人以上'],ans:0,exp:'獨立董事至少二人以上。'},
+{type:'choice',topic:'CSR',q:'上市上櫃公司關注消費者權益、社區環保及公益等問題，表示企業重視哪一個議題？',opts:['企業損益平衡','公司社會責任','永續經營','股東獲利最大化'],ans:1,exp:'消費者、環境、公益是公司社會責任 CSR 關鍵字。'},
+{type:'choice',topic:'風險管理',q:'有關企業風險管理敘述，下列哪一項不正確？',opts:['是一份風險清單','需要對組織內部所有風險進行盤點與彙整','企業風險管理的範圍廣泛','積極管理風險所執行的各種工作'],ans:0,exp:'企業風險管理不是單純清單，而是整體風險管理機制。'},
+{type:'choice',topic:'RegTech',q:'將科技應用於金融機構之風險管理及法令遵循領域，屬於哪一項？',opts:['監理科技','法遵科技','金融科技','數位轉型'],ans:1,exp:'風險管理＋法令遵循＝法遵科技 RegTech。'},
+{type:'choice',topic:'內控目標',q:'下列哪一項不是內部控制的三項目標之一？',opts:['營運之效率及效果，包括獲利、績效及保障資產安全等目標','報導具可靠性、及時性、透明性及符合相關規範','遵循相關法令規章','保護企業的員工個人資料'],ans:3,exp:'內控三目標是營運、報導、法遵。'},
+{type:'choice',topic:'COSO',q:'公司誠信與道德價值、董事會治理監督責任、組織結構、權責分派、人力資源政策等，屬於內部控制哪一要素？',opts:['控制環境','風險評估','控制作業','監督作業'],ans:0,exp:'誠信、董事會、組織結構、人資政策是控制環境。'},
+{type:'choice',topic:'內控目的',q:'內部控制目的有偵測缺失與預防缺失，下列哪個案例屬於偵測缺失？',opts:['存貨被偷','原料浪費','薪資錯誤','員工資料外洩'],ans:2,exp:'薪資錯誤可透過定期檢查偵測出來。'},
+{type:'choice',topic:'三道防線',q:'企業的法令遵循與風險管理等職能，可歸類為內部控制的哪一道防線？',opts:['第一道防線','第二道防線','第三道防線','第四道防線'],ans:1,exp:'法遵、風管屬第二道防線。'},
+{type:'choice',topic:'資訊科技',q:'下列哪一項不是資訊科技應用到企業內部控制制度的優點？',opts:['作業標準化提高，依賴人工作業程度減少','資訊系統邏輯較統一，有助於內控設計有效性的驗證','稽核人員對內控執行有效性抽樣測試，要維持一定的樣本數量','營運作業數位化，可在關鍵環節保留作業軌跡'],ans:2,exp:'IT 可減少樣本數與查核人力，不是維持一定樣本數。'},
+{type:'choice',topic:'資訊與溝通',q:'公司蒐集、產生及使用內外部攸關資訊，並確保內外部有效溝通，屬於內部控制哪一組成要素？',opts:['控制環境','風險評估','資訊與溝通','策略規劃'],ans:2,exp:'資訊流通與溝通就是資訊與溝通。'},
+{type:'choice',topic:'控制缺失',q:'有違法情事產生，例如被主管機關裁罰，是屬一般控制缺失的哪一種？',opts:['一般缺失','重大缺失','重大缺陷','以上皆非'],ans:2,exp:'違法裁罰通常屬重大缺陷。'},
+{type:'choice',topic:'公司治理',q:'公司治理五大原則不包含下列何者？',opts:['保障股東權益','強化董事會職能','增加公司負債','提升資訊透明度'],ans:2,exp:'公司治理五原則：股、董、監、利、資。'},
+{type:'choice',topic:'GRC',q:'GRC 不包含下列哪一項？',opts:['公司治理','風險管理','法規遵循','財務報表'],ans:3,exp:'GRC＝Governance、Risk、Compliance。'},
+{type:'choice',topic:'ERM',q:'企業風險管理 ERM 不包含下列何者？',opts:['治理面','策略面','行銷面','營運面'],ans:2,exp:'ERM 五面向：治理、策略、營運、法規、報告。'},
+{type:'choice',topic:'風險管理組成',q:'下列何者不是風險管理組成要素？',opts:['管理策略面','風險組織面','風險流程面','報告面'],ans:3,exp:'風險管理四組成：策略、組織、流程、資訊。'},
+{type:'choice',topic:'風險管理組成',q:'建立整體層級之獨立風險管理機制，確保風險辨識、衡量、控制、溝通及監督一致性，屬於哪一項？',opts:['管理策略面','風險組織面','風險流程面','風險行銷面'],ans:1,exp:'建立獨立風險管理機制是風險組織面。'},
+{type:'choice',topic:'風險流程',q:'風險管理流程可分四大面向，下列何者不是？',opts:['風險辨識','風險組織','風險衡量','風險監控'],ans:1,exp:'流程為辨識、衡量、溝通、監控；組織不是流程。'},
+{type:'choice',topic:'風險',q:'下列何者不是常見的外部風險動因？',opts:['外部法規變化','經濟環境波動','人口密度改變','策略執行不當'],ans:3,exp:'策略執行不當是內部風險。'},
+{type:'choice',topic:'數位三角',q:'數位三角架構不包含下列何者？',opts:['人工智慧','區塊鏈','金融科技','傳統會計'],ans:3,exp:'數位三角：AI、區塊鏈、金融科技。'},
+{type:'choice',topic:'知識創造',q:'資料、資訊、知識的正確順序為何？',opts:['知識→資訊→資料','資料→知識→資訊','資料→資訊→知識','資訊→資料→知識'],ans:2,exp:'資料經整理成資訊，資訊再分析形成知識。'},
+{type:'choice',topic:'內控配套',q:'下列何者不是內部控制配套措施？',opts:['授權','職能分工','行銷策略','存取控制'],ans:2,exp:'內控五配套：授權、分工、存取控制、獨立驗證、會計紀錄。'},
+{type:'choice',topic:'內控配套',q:'下列何者屬於偵測性控制？',opts:['職能分工','系統控制','定期檢查薪資帳本','授權'],ans:2,exp:'定期檢查帳本可偵測薪資錯誤。'},
+{type:'choice',topic:'內部稽核定義',q:'有關內部稽核定義，哪一項敘述不正確？',opts:['內部稽核是獨立、客觀之確認性、諮詢性服務','內部稽核旨在增加價值及改善機構營運','內部稽核透過應用系統及規範之方法以促進機構改善','內部稽核評估控制環境並監督作業之效果，以達成機構目標'],ans:3,exp:'內稽應評估並改善風險管理、控制與治理過程，不是只評估控制環境與監督作業。'},
+{type:'choice',topic:'準則',q:'請問下列敘述哪一個正確？',opts:['實施準則為一般準則及作業準則之延伸，適用於確認性或諮詢服務的規定','作業準則為一般準則及實施準則之延伸','應用準則係屬一般準則及作業準則之延伸','一般準則是應用在實施準則及作業準則'],ans:0,exp:'實施準則延伸一般準則與作業準則，適用於確認性或諮詢服務。'},
+{type:'choice',topic:'規程',q:'為維護內部稽核單位獨立性，內部稽核單位職權由誰核准後授予實施？',opts:['會計長','經營委員會','董事會','營運長'],ans:2,exp:'內稽職權由董事會核准。'},
+{type:'choice',topic:'規程',q:'內部稽核規程主要包含下列何者？',opts:['目標、策略、行銷','目的、職權、責任','財務、會計、報表','管理、營運、銷售'],ans:1,exp:'規程要素：目的、職權、責任。'},
+{type:'choice',topic:'規程',q:'下列何者不是內部稽核規程要素？',opts:['責任','目的','紀律','職權'],ans:2,exp:'規程要素是目的、職權、責任。'},
+{type:'choice',topic:'規程',q:'規劃年度工作時的資源需求應向誰審核？',opts:['公司工會','董事會','內部稽核主管','財務長'],ans:1,exp:'資源需求與年度稽核計畫應提董事會審核。'},
+{type:'choice',topic:'獨立性',q:'有關內部稽核單位獨立性，應有下列哪一個特性？',opts:['稽核主管對人力的配置與督導','要求內部稽核人員持續專業發展','強化人際關係溝通','在機構具有獨立地位'],ans:3,exp:'獨立性強調在機構中具有獨立地位。'},
+{type:'choice',topic:'報告關係',q:'讓內部稽核單位最可能維持獨立性之組織架構，是內部稽核主管向誰報告？',opts:['行政性報告向董事會，功能性報告向CEO','行政性報告向會計長，功能性報告向執行長','行政性報告向執行長，功能性報告向董事會','行政性報告向執行長，功能性報告向外部審計人員'],ans:2,exp:'行政向 CEO，功能向董事會。'},
+{type:'choice',topic:'報告關係',q:'國際內部稽核協會在行政上的理想報告關係是向何者報告？',opts:['公司執行長','董事長','內部稽核主管','財務長'],ans:0,exp:'行政性報告向 CEO / 執行長。'},
+{type:'choice',topic:'客觀性',q:'下列哪一項情況，內部稽核人員最可能損及其客觀性？',opts:['承接確認性服務，但一個月前才從受查部門調職到稽核部門','由於預算限制，導致稽核範圍減少','參與工作小組提出考核標準建議','稽核前曾覆核採購契約草稿'],ans:0,exp:'剛從受查部門調職，容易產生利益衝突與客觀性受損。'},
+{type:'choice',topic:'客觀性',q:'各種稽核活動客觀性程度不同，以下哪種客觀性最強？',opts:['對公司加班政策的合規性稽核','對人事雇傭解雇活動的經營性稽核','對市場部的績效稽核','薪資程式的財務控制稽核'],ans:0,exp:'合規性稽核判斷標準較明確，客觀性較強。'},
+{type:'choice',topic:'獨立性',q:'下列哪一項情況最不可能加強內部稽核單位的獨立性？',opts:['內部稽核部門已制定正式書面章程','向董事會提交年度稽核工作計畫','與董事會建立直接報告關係','獲得充分資金來源，落實全面稽核方案'],ans:3,exp:'資金充足不等於獨立性；報告關係與章程才是重點。'},
+{type:'choice',topic:'職責',q:'下列哪項不是內部稽核人員的職責？',opts:['設計並落實恰當的控制措施','發現對存貨內部控制的缺陷','研究影響經營活動的市場因素','評價公司政策執行的有效性'],ans:0,exp:'設計並落實控制措施是管理層責任，不是內稽職責。'},
+{type:'choice',topic:'專業能力',q:'內部稽核單位整體所須具備的能力，包括認識下列哪一項？',opts:['內部稽核程式及技術','會計原則及技術','生產原則','科技應用'],ans:1,exp:'歷屆答案為會計原則及技術。'},
+{type:'choice',topic:'專業注意',q:'何謂內部稽核人員的專業上應有之注意？',opts:['採行合理謹慎及適任之內部稽核人員所應有之注意','意指完全無錯誤或失敗','查出所有重大錯誤或舞弊情事','與人相處溝通'],ans:0,exp:'專業應有注意是合理謹慎，不是保證無錯。'},
+{type:'choice',topic:'專業注意',q:'有關專業上應有之注意，下列哪一項敘述正確？',opts:['詳細複核某一特定功能的所有交易','已知內控制度薄弱時仍有超凡績效且毫無錯誤','在每個專案執行期間，考量重大違規的可能性','詳細測試以絕對保證沒有未遵循事項'],ans:2,exp:'專業注意要考量重大違規、錯誤或舞弊可能性。'},
+{type:'choice',topic:'專業注意',q:'有關專業上應有之注意，下列何者正確？',opts:['詳細複核所有交易','已知內控薄弱時仍能毫無錯誤','在每個專案期間考量重大違規可能性','詳細測試以絕對保證'],ans:2,exp:'合理注意不等於詳細測全部，也不提供絕對保證。'},
+{type:'choice',topic:'稽核技能',q:'內部稽核執業準則要求稽核人員需具備何種執行稽核工作之知識及技能？',opts:['精通於運用稽核準則及程序之知識於一些特殊情況，而不需依賴太多技術研究及協助','對特殊或潛在問題，精通運用會計及資訊系統知識','具備任何查核情況下研究適切程序的能力','查核財務記錄及報告時，具備會計原則及實務廣泛了解'],ans:0,exp:'歷屆答案為 A。'},
+{type:'choice',topic:'舞弊',q:'稽核主管指出某安全部門潛在舞弊，但兩年後才發現持續貪瀆。兩年前稽核主管應如何處理？',opts:['處理方式正確','定期檢查安全部門該案件之狀況','對該案件進行調查','開除該嫌疑犯'],ans:1,exp:'潛在舞弊需持續追蹤狀況。'},
+{type:'choice',topic:'確認業務',q:'下列何者不是稽核的確認性業務？',opts:['品質稽核','財務稽核','標竿比較','遵循性稽核'],ans:2,exp:'標竿比較較偏諮詢性或改善工具，不是確認性稽核。'},
+{type:'choice',topic:'業務範圍',q:'下列何者屬於諮詢性業務？',opts:['風險與控制自我評估','品質稽核','財務稽核','遵循性稽核'],ans:0,exp:'風險與控制自我評估常列於諮詢性業務。'},
+{type:'choice',topic:'內控',q:'內部控制提供何種保證？',opts:['完全保證','絕對保證','合理確保','不提供保證'],ans:2,exp:'內控只能提供合理確保，不是絕對保證。'},
+{type:'choice',topic:'內控',q:'內部控制主要是什麼？',opts:['一項制度','一套過程','一個部門','一種工具'],ans:1,exp:'內控是一套受到人員影響的過程。'},
+{type:'choice',topic:'上市規定',q:'上市上櫃公司宜提早於會計年度終了後幾個月內公告並申報年度財務報告？',opts:['一個月','二個月','三個月','四個月'],ans:1,exp:'歷屆答案為二個月。'},
+{type:'choice',topic:'內控五要素',q:'公司進行持續性評估、個別評估或併行，以確保內控制度各組成要素存在並持續運作，屬於哪一要素？',opts:['控制環境','監督作業','資訊與溝通','風險評估'],ans:1,exp:'持續性與個別評估屬監督作業。'},
+{type:'choice',topic:'內控組成',q:'下列何者不是公司內部控制制度組成要素？',opts:['控制環境','風險評估','控制作業','策略規劃'],ans:3,exp:'內控五要素不包含策略規劃。'},
+{type:'choice',topic:'獨立性',q:'有關內部稽核單位獨立性，哪個特性正確？',opts:['稽核主管對人力配置與督導','持續專業發展與善盡注意','強化人際關係溝通','在機構具有獨立地位'],ans:3,exp:'獨立性重點是在機構有獨立地位。'},
+{type:'choice',topic:'獨立性',q:'哪一項最不可能加強內部稽核單位獨立性？',opts:['制定正式書面章程','向董事會提交年度稽核工作計畫','與董事會建立直接報告關係','獲得充分資金來源落實全面稽核方案'],ans:3,exp:'充分資金較偏資源，不是獨立性的核心。'},
+{type:'choice',topic:'專業注意',q:'專業應有之注意並非意指什麼？',opts:['合理謹慎','適任人員應有注意','完全無錯誤或失敗','考量重大風險'],ans:2,exp:'專業注意不是完全無錯誤或失敗。'},
+{type:'tf',topic:'GRC',q:'GRC 包含公司治理、風險管理與法規遵循。',ans:true,exp:'GRC＝Governance、Risk、Compliance。'},
+{type:'tf',topic:'GRC',q:'GRC 三者彼此無關，可以各做各的。',ans:false,exp:'GRC 強調整合運作。'},
+{type:'tf',topic:'公司治理',q:'公司治理五大原則包含保障股東權益與提升資訊透明度。',ans:true,exp:'股東權益與資訊透明度都是公司治理五原則。'},
+{type:'tf',topic:'公司治理',q:'公司治理只與股東有關，與利害關係人無關。',ans:false,exp:'公司治理也要尊重利害關係人權益。'},
+{type:'tf',topic:'ERM',q:'企業風險管理的目的在完全消除所有風險。',ans:false,exp:'風險無法完全消除，只能管理與降低至可接受程度。'},
+{type:'tf',topic:'ERM',q:'ERM 五面向包含治理、策略、營運、法規與報告。',ans:true,exp:'這是 ERM 五面向。'},
+{type:'tf',topic:'風險',q:'法規變化屬於外部風險。',ans:true,exp:'法規、經濟、人口變動屬外部風險。'},
+{type:'tf',topic:'風險',q:'策略執行不當屬於外部風險。',ans:false,exp:'策略執行不當屬內部風險。'},
+{type:'tf',topic:'風險管理組成',q:'風險管理組成要素共有四個：策略、組織、流程、資訊。',ans:true,exp:'策、組、流、資。'},
+{type:'tf',topic:'內控',q:'內部控制是一套過程。',ans:true,exp:'COSO 定義內控為一套過程。'},
+{type:'tf',topic:'內控',q:'內部控制可提供絕對保證。',ans:false,exp:'只能提供合理確保。'},
+{type:'tf',topic:'內控',q:'內部控制三大目標是營運、報導與法遵。',ans:true,exp:'營、報、法。'},
+{type:'tf',topic:'COSO',q:'控制環境包含誠信道德價值、董事會治理監督責任、組織結構與人力資源政策。',ans:true,exp:'這些都是控制環境關鍵字。'},
+{type:'tf',topic:'三道防線',q:'法令遵循與風險管理屬於第二道防線。',ans:true,exp:'第二道防線是風控、法遵等幕僚單位。'},
+{type:'tf',topic:'三道防線',q:'內部稽核屬於第二道防線。',ans:false,exp:'內部稽核是第三道防線。'},
+{type:'tf',topic:'三道防線',q:'第一道防線主要是營運單位。',ans:true,exp:'第一線是日常營運與管理控制。'},
+{type:'tf',topic:'資訊科技',q:'資訊科技可幫助保留作業軌跡，有助於查核佐證資料蒐集。',ans:true,exp:'數位化可留下軌跡。'},
+{type:'tf',topic:'資訊科技',q:'資訊科技導入後，稽核抽樣測試一定要維持相同樣本數。',ans:false,exp:'IT 可降低抽樣與人力負擔。'},
+{type:'tf',topic:'知識創造',q:'資料經整理形成資訊，資訊再經分析形成知識。',ans:true,exp:'資料→資訊→知識。'},
+{type:'tf',topic:'內控配套',q:'職能分工可降低舞弊風險。',ans:true,exp:'不相容職務分離可降低舞弊或錯誤。'},
+{type:'tf',topic:'內控配套',q:'存取控制與權限管理無關。',ans:false,exp:'存取控制就是權限控管。'},
+{type:'tf',topic:'內控目的',q:'薪資錯誤屬於偵測缺失的例子。',ans:true,exp:'可透過定期檢查發現。'},
+{type:'tf',topic:'內部稽核',q:'內部稽核是獨立、客觀的確認性與諮詢性服務。',ans:true,exp:'這是內稽定義核心。'},
+{type:'tf',topic:'內部稽核',q:'內部稽核主要負責設計並落實控制措施。',ans:false,exp:'設計與落實控制是管理層責任。'},
+{type:'tf',topic:'內部稽核',q:'內部稽核的目的包含增加價值與改善機構營運。',ans:true,exp:'內稽定義的目的。'},
+{type:'tf',topic:'獨立性',q:'內部稽核功能性報告應向董事會或審計委員會報告。',ans:true,exp:'功能向董事會，行政向 CEO。'},
+{type:'tf',topic:'獨立性',q:'行政性報告通常向 CEO 或執行長報告。',ans:true,exp:'行政性報告向 CEO。'},
+{type:'tf',topic:'客觀性',q:'剛從受查部門調到稽核部門，立刻查原部門，可能損及客觀性。',ans:true,exp:'會有利益衝突疑慮。'},
+{type:'tf',topic:'客觀性',q:'客觀性代表不偏不倚、公正判斷。',ans:true,exp:'客觀性是態度與判斷中立。'},
+{type:'tf',topic:'規程',q:'內部稽核規程要素包含目的、職權與責任。',ans:true,exp:'目、權、責。'},
+{type:'tf',topic:'規程',q:'內部稽核主管個人任期長短是內部稽核規程的必要內容。',ans:false,exp:'個人任期長短不是規程必要內容。'},
+{type:'tf',topic:'專業注意',q:'專業應有之注意要求稽核人員查出所有重大錯誤或舞弊。',ans:false,exp:'不是保證查出全部，而是合理謹慎。'},
+{type:'tf',topic:'專業注意',q:'專業應有之注意需考量重大錯誤、舞弊或未遵循的可能性。',ans:true,exp:'這是職業審慎的重要判斷因素。'},
+{type:'tf',topic:'專業注意',q:'成本與潛在效益也會影響查核範圍與程度。',ans:true,exp:'職業審慎需考量成本效益。'},
+{type:'tf',topic:'確認諮詢',q:'確認性業務包含品質稽核、財務稽核與遵循性稽核。',ans:true,exp:'這些屬確認性業務例子。'},
+{type:'tf',topic:'確認諮詢',q:'標竿比較通常屬於確認性稽核。',ans:false,exp:'標竿比較較偏諮詢或改善活動。'},
+{type:'tf',topic:'RegTech',q:'法遵科技是將科技應用於金融機構風險管理及法令遵循領域。',ans:true,exp:'這就是 RegTech。'},
+{type:'tf',topic:'內控',q:'內部控制是用來幫助企業達成目標，而不是訂定企業目標本身。',ans:true,exp:'內控是合理確保目標達成的過程。'}
+];
+let current = [...bank]; let wrong = [];
+function letter(i){return ['A','B','C','D','E'][i]||''}
+function renderSet(target, arr){const box=document.getElementById(target); box.innerHTML=''; arr.forEach((item,idx)=>{const div=document.createElement('div'); div.className='q'; div.dataset.index=idx; let html=`<div><span class="pill">${item.topic}</span> <span class="pill">${item.type==='tf'?'是非':'選擇'}</span></div><div class="q-title">${idx+1}. ${item.q}</div>`; if(item.type==='choice'){item.opts.forEach((o,i)=>{html+=`<button class="choice" onclick="answer('${target}',${idx},${i})">(${letter(i)}) ${o}</button>`})}else{html+=`<div class="tf-row"><button class="choice" onclick="answer('${target}',${idx},true)">⭕ 是 / 對</button><button class="choice" onclick="answer('${target}',${idx},false)">❌ 否 / 錯</button></div>`} html+=`<div class="ans"><b>正確答案：</b>${item.type==='choice'?letter(item.ans):(item.ans?'是 / 對':'否 / 錯')}<br>${item.exp}</div>`; div.innerHTML=html; box.appendChild(div);}); updateScore(target)}
+function answer(target,idx,val){const arr=(target==='mockQuestions')?mockArr:current; const item=arr[idx]; const qDiv=document.getElementById(target).children[idx]; const buttons=[...qDiv.querySelectorAll('.choice')]; let ok=(item.type==='choice')? val===item.ans : val===item.ans; buttons.forEach((b,i)=>{b.classList.remove('selected'); if(item.type==='choice' && i===item.ans)b.classList.add('correct'); if(item.type==='tf' && ((i===0&&item.ans===true)||(i===1&&item.ans===false))) b.classList.add('correct');}); const chosenIndex=item.type==='choice'?val:(val?0:1); buttons[chosenIndex].classList.add(ok?'correct':'wrong'); qDiv.querySelector('.ans').classList.add('show'); item.user=val; item.correct=ok; if(!ok && !wrong.includes(item)) wrong.push(item); updateScore(target); renderWrong();}
+function updateScore(target){const arr=(target==='mockQuestions')?mockArr:current; const done=arr.filter(x=>x.user!==undefined).length; const ok=arr.filter(x=>x.correct).length; const text= done?`已作答 ${done}/${arr.length}，答對 ${ok} 題`:`共 ${arr.length} 題，尚未作答`; if(target==='mockQuestions') document.getElementById('mockScore').textContent=text; else document.getElementById('score').textContent=text;}
+function renderQuiz(mode='all'){current=bank.filter(x=>mode==='all'||x.type===mode); current.forEach(x=>{delete x.user; delete x.correct}); renderSet('questions',current)}
+function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1])}
+function shuffleCurrent(){current=shuffle(current); renderSet('questions',current)}
+function resetAll(){bank.forEach(x=>{delete x.user; delete x.correct}); current.forEach(x=>{delete x.user; delete x.correct}); wrong=[]; renderSet('questions',current); if(window.mockArr) renderSet('mockQuestions',mockArr); renderWrong();}
+let mockArr=[]; function startMock(){mockArr=shuffle(bank).slice(0,20).map(x=>Object.assign({},x)); renderSet('mockQuestions',mockArr)}
+function renderWrong(){const box=document.getElementById('wrongBox'); if(wrong.length===0){box.innerHTML='<div class="small">目前沒有錯題。</div>';return} box.innerHTML='<ol class="review-list">'+wrong.map(x=>`<li><b>${x.topic}</b>｜${x.q}<br><span class="small">答案：${x.type==='choice'?letter(x.ans):(x.ans?'是':'否')}｜${x.exp}</span></li>`).join('')+'</ol>'}
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');['quiz','mock','notes','wrong'].forEach(id=>document.getElementById(id).classList.add('hidden'));document.getElementById(btn.dataset.view).classList.remove('hidden');}));
+renderQuiz('all'); renderWrong();
+</script>
+</body>
+</html>
